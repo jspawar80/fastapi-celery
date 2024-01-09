@@ -16,7 +16,15 @@ spec:
       - name: rabbitmq
         image: bitnami/rabbitmq:3.7
         ports:
-        - containerPort: 5672
+        - name: amqp
+          containerPort: 5672
+          protocol: TCP
+        - name: http
+          containerPort: 15672
+          protocol: TCP
+        - name: prometheus
+          containerPort: 15692
+          protocol: TCP
         volumeMounts:
         - name: rabbitmq-data
           mountPath: /bitnami
