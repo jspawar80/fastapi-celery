@@ -16,8 +16,6 @@ RUN pip install poetry
 
 RUN pip install fastapi
 
-RUN pip install "uvicorn[standard]"
-
 # Install project dependencies
 RUN poetry install --no-root --no-dev
 
