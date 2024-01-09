@@ -17,6 +17,9 @@ This diagram shows the flow of tasks from the FastAPI application, through Rabbi
 
 I'm using HPA configurations based on CPU utilization.
 
+This HPA configuration specifies that the celery-worker Deployment should have a minimum of 1 replicas and a maximum of 10. 
+These HPAs are set to scale the respective deployments between 1 and 10 replicas based on CPU utilization.
+
 To enable automatic scaling of your Kubernetes deployments, including scaling down to zero and up from zero based on incoming traffic, you can utilize Kubernetes Horizontal Pod Autoscaler (HPA) in conjunction with a serverless framework like KEDA (Kubernetes-based Event-Driven Autoscaling).
 KEDA can extend the functionality of Kubernetes HPA to support scaling to and from zero, which is not possible with the standard HPA. KEDA works by activating and deactivating Kubernetes deployments, allowing them to scale from zero to N instances and back to zero.
 
