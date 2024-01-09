@@ -2,6 +2,24 @@
 
 > Minimal example utilizing FastAPI and Celery with RabbitMQ for task queue, Redis for Celery backend and flower for monitoring the Celery tasks.
 
+## Application Architecture
+
+FastAPI Application
+         |
+         v
+      RabbitMQ  ---->  Celery Workers  ---->  Redis
+                              |
+                              v
+                           Flower
+
+1. FastAPI Application at the center, as it's the entry point for requests.
+2. RabbitMQ connected to FastAPI, representing the task queue.
+3. Celery Workers, showing their connection to RabbitMQ for receiving tasks.
+4. Redis, linked to Celery, depicting its role as the backend for task results and state management.
+5. Flower, also connected to Celery, for monitoring tasks and workers.
+
+This diagram shows the flow of tasks from the FastAPI application, through RabbitMQ and Celery, with state management in Redis, and monitoring through Flower
+
 ## Requirements
 
 - Docker
