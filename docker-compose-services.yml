@@ -6,11 +6,10 @@ services:
     ports:
       - "4369:4369"
       - "5672:5672"
+      - "25672:25672"
+      - "15672:15672"
     volumes:
       - "rabbitmq_data:/bitnami"
-    networks:
-      - app-network
-
 
   redis:
     image: "bitnami/redis:5.0.4"
@@ -20,8 +19,6 @@ services:
       - "6379:6379"
     volumes:
       - "redis_data:/bitnami/redis/data"
-    networks:
-      - app-network
 
   celery-flower:
     image: gregsi/latest-celery-flower-docker:latest
@@ -40,49 +37,9 @@ services:
     depends_on:
       - rabbitmq
       - redis
-    networks:
-      - app-network
-
-
-  app:
-   build:
-     context: .
-     dockerfile: Dockerfile
-    # image: "jspawar80/fastapi-celery:latest"
-    ports:
-      - "8000:8000"
-    networks:
-      - app-network
-    depends_on:
-      - rabbitmq
-      - redis
-    command: "poetry run hypercorn app/main:app --bind 0.0.0.0:8000 --reload"
-
-
-
-  celery-worker:
-   build:
-     context: .
-     dockerfile: Dockerfile
-    # image: "jspawar80/fastapi-celery:latest"
-    networks:
-      - app-network
-    depends_on:
-      - rabbitmq
-      - redis
-    command: "poetry run celery -A app.worker.celery_worker worker -l info -Q test-queue -c 1"
-
-
-
 
 volumes:
   rabbitmq_data:
     driver: local
   redis_data:
     driver: local
-
-
-
-networks:
-  app-network:
-    driver: bridge
