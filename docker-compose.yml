@@ -45,10 +45,9 @@ services:
 
 
   app:
-   build:
-     context: .
-     dockerfile: Dockerfile
-    # image: "jspawar80/fastapi-celery:latest"
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     networks:
@@ -61,16 +60,16 @@ services:
 
 
   celery-worker:
-   build:
-     context: .
-     dockerfile: Dockerfile
-    # image: "jspawar80/fastapi-celery:latest"
+    build:
+      context: .
+      dockerfile: Dockerfile
     networks:
       - app-network
     depends_on:
       - rabbitmq
       - redis
-    command: "poetry run celery -A app.worker.celery_worker worker -l info -Q test-queue -c 1"
+    command: "poetry run celery worker -A app.worker.celery_worker -l info -Q test-queue -c 1"
+
 
 
 
