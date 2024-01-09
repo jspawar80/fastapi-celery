@@ -4,13 +4,6 @@
 
 ## Application Architecture
 
-FastAPI Application
-         |
-         v
-      RabbitMQ  ---->  Celery Workers  ---->  Redis
-                              |
-                              v
-                           Flower
 
 1. FastAPI Application at the center, as it's the entry point for requests.
 2. RabbitMQ connected to FastAPI, representing the task queue.
