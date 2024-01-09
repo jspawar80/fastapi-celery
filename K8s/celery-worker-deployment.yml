@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: celery-worker
+  template:
+    metadata:
+      labels:
+        app: celery-worker
+    spec:
+      containers:
+      - name: celery-worker
+        image: jspawar80/fastapi-image:latest
+        args: ['poetry', 'run', 'celery', '-A', 'app.worker.celery_worker', 'worker', '-l', 'info', '-Q', 'test-queue', '-c', '1']
+        env:
+        - name: RABBITMQ_HOST
+          value: rabbitmq
+        - name: REDIS_HOST
+          value: redis
