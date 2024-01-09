@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - name: fastapi
+        image: jspawar80/fastapi-image:latest
+        ports:
+        - containerPort: 8000
+        args: ["poetry", "run", "hypercorn", "app/main:app", "--bind", "0.0.0.0:8000", "--reload"]
+        env:
+        - name: RABBITMQ_HOST
+          value: rabbitmq
+        - name: REDIS_HOST
+          value: redis
