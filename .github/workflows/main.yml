@@ -2,8 +2,8 @@ name: Docker Build, Push and Deploy to AWS EKS
 
 on:
   push:
-     # branches:
-     #   - master  # You can change this to your main branch name
+     branches:
+       - master  # You can change this to your main branch name
 
 jobs:
   build-and-push:
