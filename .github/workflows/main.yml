@@ -1,25 +1,25 @@
-name: Docker Build and Push
+# name: Docker Build and Push
 
-on:
-  push:
-    branches:
-      - master  # You can change this to your main branch name
+# on:
+#   push:
+#     branches:
+#       - master  # You can change this to your main branch name
 
-jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-and-push:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
       
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+#       - name: Login to Docker Hub
+#         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and tag Docker image
-        run: |
-          docker build -t jspawar80/fastapi-celery:latest .
-          docker tag jspawar80/fastapi-celery:latest jspawar80/fastapi-celery:latest
+#       - name: Build and tag Docker image
+#         run: |
+#           docker build -t jspawar80/fastapi-celery:latest .
+#           docker tag jspawar80/fastapi-celery:latest jspawar80/fastapi-celery:latest
       
-      - name: Push Docker image to Docker Hub
-        run: docker push jspawar80/fastapi-celery:latest
+#       - name: Push Docker image to Docker Hub
+#         run: docker push jspawar80/fastapi-celery:latest
