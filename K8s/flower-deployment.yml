@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-flower
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: celery-flower
+  template:
+    metadata:
+      labels:
+        app: celery-flower
+    spec:
+      containers:
+        - name: celery-flower
+          image: gregsi/latest-celery-flower-docker:latest
+          ports:
+            - containerPort: 5555
+          env:
+            - name: AMQP_ADMIN_HOST
+              value: rabbitmq
+            - name: AMQP_ADMIN_PASSWORD
+              value: bitnami
+            - name: AMQP_ADMIN_PORT
+              value: "15672"
+            - name: AMQP_ADMIN_USERNAME
+              value: user
+            - name: AMQP_HOST
+              value: rabbitmq
+            - name: AMQP_PASSWORD
+              value: bitnami
+            - name: AMQP_PORT
+              value: "5672"
+            - name: AMQP_USERNAME
+              value: user
+            - name: FLOWER_BASIC_AUTH
+              value: user:test
+  
+
+
+        
