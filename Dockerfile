@@ -14,8 +14,6 @@ COPY pyproject.toml poetry.lock /app/
 # Install Poetry
 RUN pip install poetry
 
-RUN pip install fastapi
-
 # Install project dependencies
 RUN poetry install --no-root --no-dev
 
