@@ -1,13 +1,28 @@
-FROM python:3.7-slim
+# Use an official Python runtime as a base image
+FROM python:3.9-slim
 
-LABEL maintainer="Grega Vrbančič <grega.vrbancic@gmail.com"
+LABEL maintainer="jspawar80@gmail.com"
 
 ENV DOCKER=true
 
-COPY pyproject.toml .
+# Set the working directory in the container
+WORKDIR /app
 
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir poetry && \
-    poetry install
+# Copy the dependencies file to the working directory
+COPY pyproject.toml poetry.lock /app/
 
+# Install Poetry
+RUN pip install poetry
+
+RUN pip install fastapi
+
+RUN pip install "uvicorn[standard]"
+
+# Install project dependencies
+RUN poetry install --no-root --no-dev
+
+# Copy the entire application to the container
+COPY . /app
+
+# Expose the port that FastAPI runs on
 EXPOSE 8000
