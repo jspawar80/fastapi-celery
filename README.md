@@ -48,27 +48,25 @@ KEDA can extend the functionality of Kubernetes HPA to support scaling to and fr
 
 ## challenges encountered and the corresponding approaches to address them:
 
-Challenge: Integration between FastAPI and Celery.
-Approach: We structured the code to enable FastAPI to trigger Celery tasks asynchronously. By leveraging Celery's ability to execute tasks asynchronously, we designed the FastAPI endpoints to initiate tasks via Celery, allowing the application to handle long-running operations without blocking the main thread.
+- Challenge: Integration between FastAPI and Celery.
+  - Approach: We structured the code to enable FastAPI to trigger Celery tasks asynchronously. By leveraging Celery's ability to execute tasks asynchronously, we designed the FastAPI endpoints to initiate tasks via Celery, allowing the application to handle long-running operations without blocking the main thread.
 
-Challenge: Orchestrating multiple services like RabbitMQ, Redis, FastAPI, and Celery using Docker and Docker Compose to ensure seamless communication between these components.
-Approach: We utilized Docker and Docker Compose to containerize and manage services. Each service, such as RabbitMQ, Redis, FastAPI, and Celery, was containerized, allowing easy setup, isolation, same network, and reproducibility across different environments.
+- Challenge: Orchestrating multiple services like RabbitMQ, Redis, FastAPI, and Celery using Docker and Docker Compose to ensure seamless communication between these components.
+  - Approach: We utilized Docker and Docker Compose to containerize and manage services. Each service, such as RabbitMQ, Redis, FastAPI, and Celery, was containerized, allowing easy setup, isolation, same network, and reproducibility across different environments.
 
-Challenge: Managing configuration settings, such as connection details for RabbitMQ, Redis, and Celery within the application.
-Approach: We used environment variables to parameterize configurations, making the application more flexible. This approach allows modifying configurations without changing the code directly, enabling easier deployment across various environments.
-
-Challenge: Maintaining an efficient development workflow, ensuring code quality, and testing the FastAPI and Celery integration.
+- Challenge: Managing configuration settings, such as connection details for RabbitMQ, Redis, and Celery within the application.
+  - Approach: We used environment variables to parameterize configurations, making the application more flexible. This approach allows modifying configurations without changing the code directly, enabling easier deployment across various environments.
 
 ### troubleshooting a Kubernetes deployment:
 
-Problem: Celery tasks dispatched from FastAPI were stuck in a 'PENDING' state, and Flower UI wasn't showing the Celery workers.
-Approach:
-1. Ensured proper internal networking within Kubernetes, allowing communication between FastAPI, Celery workers, RabbitMQ, and Redis.
-2. Verified RabbitMQ and Redis service configurations in Kubernetes, ensuring correct environmental variables and network access for FastAPI and Celery workers.
+- Problem: Celery tasks dispatched from FastAPI were stuck in a 'PENDING' state, and Flower UI wasn't showing the Celery workers.
+  - Approach:
+    1. Ensured proper internal networking within Kubernetes, allowing communication between FastAPI, Celery workers, RabbitMQ, and Redis.
+    2. Verified RabbitMQ and Redis service configurations in Kubernetes, ensuring correct environmental variables and network access for FastAPI and Celery workers.
 Advised checking Kubernetes network policies and suggested increasing resource allocation if necessary.
 
-Challenge: Required accurate Kubernetes configurations for deploying multiple interdependent services.
-Solution: Crafted and applied detailed Kubernetes YAML configurations for deployments and services, including NodePort services for external access and environment variables for inter-service communication.
+- Challenge: Required accurate Kubernetes configurations for deploying multiple interdependent services.
+  - Solution: Crafted and applied detailed Kubernetes YAML configurations for deployments and services, including NodePort services for external access and environment variables for inter-service communication.
 
 
 ### Integration between FastAPI and Celery 
