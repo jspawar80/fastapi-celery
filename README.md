@@ -20,7 +20,7 @@
 ## Application code explanation.
 
 - This FastAPI application integrates with Celery, a task queue system, to handle asynchronous tasks efficiently. The code defines two main endpoints. The first endpoint (/{word}) triggers a background task when accessed via a GET request. It sends the provided word as a parameter to a Celery task and returns the unique ID of the task. The second endpoint (/process/{task_id}) retrieves the status and result of a specific task based on its ID. It constructs a response containing the task's ID, its current status (such as "processing" or "completed"), any encountered errors, and the task's result if it has finished successfully.
- - This FastAPI code sets up two endpoints:
+  - This FastAPI code sets up two endpoints:
 
 1. Trigger Task Endpoint (/{word}): Receives a word via a GET request, sends it as a background Celery task, and returns the task's ID.
 
