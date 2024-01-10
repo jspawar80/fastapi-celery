@@ -11,18 +11,11 @@
 4. Redis, linked to Celery, depicting its role as the backend for task results and state management.
 5. Flower, also connected to Celery, for monitoring tasks and workers.
 
-FastAPI handles incoming HTTP requests, triggers background tasks, and provides endpoints to interact with the application's functionalities.
-
-FastAPI pushes tasks into the RabbitMQ queue. Celery workers subscribe to this queue, pulling tasks for execution as they become available.
-
-Workers receive tasks from RabbitMQ, execute them independently or in parallel, and update task states. They push task results and status updates back to the backend.
-
-Celery uses Redis for task result storage, caching, and managing the state of tasks. It stores task outputs, states, and other transient data, providing a fast and persistent storage solution.
-
-Flower connects to the Celery, allowing administrators or developers to monitor task progress, worker statuses, and overall system health through an intuitive web interface.
-
-
-This diagram shows the flow of tasks from the FastAPI application, through RabbitMQ and Celery, with state management in Redis, and monitoring through Flower
+- FastAPI handles incoming HTTP requests, triggers background tasks, and provides endpoints to interact with the application's functionalities.
+- FastAPI pushes tasks into the RabbitMQ queue. Celery workers subscribe to this queue, pulling tasks for execution as they become available.
+- Workers receive tasks from RabbitMQ, execute them independently or in parallel, and update task states. They push task results and status updates back to the backend.
+- Celery uses Redis for task result storage, caching, and managing the state of tasks. It stores task outputs, states, and other transient data, providing a fast and persistent storage solution.
+- Flower connects to the Celery, allowing administrators or developers to monitor task progress, worker statuses, and overall system health through an intuitive web interface.
 
 ## Application code explanation.
 
