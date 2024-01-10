@@ -114,4 +114,46 @@ git clone https://github.com/jspawar80/fastapi-celery.git
 cd fastapi-celery/
 kubectl apply -f K8s/
 ```
- 
+## FastAPI-Celery minikube Deployment Guide
+
+1. Clone the repository.
+    
+```
+git clone https://github.com/jspawar80/fastapi-celery.git
+```
+2. start minikube
+```
+minikube start
+```
+
+3. Deployment on kubernetes.
+
+```
+cd fastapi-celery/
+kubectl apply -f K8s/
+```
+### Accessing Services
+
+1. Port Forwarding for FastAPI:
+Open a new terminal to set up port forwarding to access FastAPI for testing purposes.
+
+```
+kubectl port-forward svc/fastapi-service 8000:8000
+``` 
+2. Access FastAPI:
+Open a web browser and visit http://localhost:8000 to access the FastAPI service.
+
+Celery Flower Monitoring
+
+1. Port Forwarding for Celery Flower:
+Open another terminal to set up port forwarding to access Celery Flower for monitoring.
+
+```
+kubectl port-forward svc/celery-flower-service 5555:5555
+```
+
+2. Access Celery Flower:
+
+Open a web browser and visit http://localhost:5555 to access the Celery Flower monitoring dashboard.
+
+
