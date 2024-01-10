@@ -129,7 +129,7 @@ Open a new terminal to set up port forwarding to access FastAPI(Swagger UI).
 kubectl port-forward svc/fastapi-service 8000:8000
 ``` 
 2. Access FastAPI:
-Open a web browser and visit http://localhost:8000 to access the FastAPI service.
+Open a web browser and visit http://localhost:8000/docs to access the FastAPI service.
 
 Celery Flower Monitoring
 
