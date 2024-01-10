@@ -123,7 +123,7 @@ kubectl apply -f K8s/
 ### Accessing Services
 
 1. Port Forwarding for FastAPI:
-Open a new terminal to set up port forwarding to access FastAPI for testing purposes.
+Open a new terminal to set up port forwarding to access FastAPI(Swagger UI).
 
 ```
 kubectl port-forward svc/fastapi-service 8000:8000
