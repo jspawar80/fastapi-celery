@@ -27,19 +27,13 @@ This FastAPI code sets up two endpoints:
 
 2. Task Result Endpoint (/process/{task_id}): Retrieves the status and result of a task based on its ID, presenting the task's ID, status, any errors encountered, and the result (if successful). The tasks run asynchronously using Celery for background processing.
 
-A Celery worker is a process or a set of processes responsible for executing tasks asynchronously within a Celery-based distributed task queue system. These workers pull tasks from the message broker, execute them, and manage the task lifecycle, including tracking their progress, updating status, and handling results.
-
-The celery_app.py file initializes the Celery application differently based on whether it's running with or without Docker. It configures the Celery app with specific backend and broker settings.
-
-Without Docker, it uses Redis as the backend for storing task results and RabbitMQ as the message broker for handling task queues and message passing . It also sets up a task route for a specific task (app.worker.celery_worker.test_celery) to a queue named test-queue.
-
-Moving on to celery_worker.py, it contains the Celery task definition test_celery(word: str). This task simulates work by running a loop that sleeps for one second in each iteration. During this loop, it updates the task's state to 'PROGRESS' and includes metadata indicating the progress percentage (increments of 10 from 10% to 100%). Finally, it returns a string with the word provided in the argument.
-
-Using Redis as a backend for Celery involves utilizing Redis as the storage mechanism for Celery's task results and other operational data. Redis serves as a fast, in-memory data structure store that can be used for various purposes, including task result storage in Celery.
-
-RabbitMQ (Message Broker): Facilitates communication between the FastAPI application and Celery workers. It ensures reliable message delivery, queues incoming tasks, and distributes them among workers for processing. RabbitMQ acts as a middleman for task distribution, ensuring tasks are executed asynchronously without overloading the application.
-
-Redis (Backend): Serves as a fast and persistent storage solution for Celery. Redis stores task results, manages task states, and caches frequently accessed data. It allows Celery workers to update task statuses, store outputs, and retrieve necessary information efficiently, contributing to the reliability and performance of task execution within the system.
+- A Celery worker is a process or a set of processes responsible for executing tasks asynchronously within a Celery-based distributed task queue system. These workers pull tasks from the message broker, execute them, and manage the task lifecycle, including tracking their progress, updating status, and handling results.
+- The celery_app.py file initializes the Celery application differently based on whether it's running with or without Docker. It configures the Celery app with specific backend and broker settings.
+- Without Docker, it uses Redis as the backend for storing task results and RabbitMQ as the message broker for handling task queues and message passing . It also sets up a task route for a specific task (app.worker.celery_worker.test_celery) to a queue named test-queue.
+- Moving on to celery_worker.py, it contains the Celery task definition test_celery(word: str). This task simulates work by running a loop that sleeps for one second in each iteration. During this loop, it updates the task's state to 'PROGRESS' and includes metadata indicating the progress percentage (increments of 10 from 10% to 100%). Finally, it returns a string with the word provided in the argument.
+- Using Redis as a backend for Celery involves utilizing Redis as the storage mechanism for Celery's task results and other operational data. Redis serves as a fast, in-memory data structure store that can be used for various purposes, including task result storage in Celery.
+- RabbitMQ (Message Broker): Facilitates communication between the FastAPI application and Celery workers. It ensures reliable message delivery, queues incoming tasks, and distributes them among workers for processing. RabbitMQ acts as a middleman for task distribution, ensuring tasks are executed asynchronously without overloading the application.
+- Redis (Backend): Serves as a fast and persistent storage solution for Celery. Redis stores task results, manages task states, and caches frequently accessed data. It allows Celery workers to update task statuses, store outputs, and retrieve necessary information efficiently, contributing to the reliability and performance of task execution within the system.
 
 
 ##  Automatic scaling of your Kubernetes deployments
