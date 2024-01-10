@@ -103,7 +103,7 @@ Execute the following command: ```poetry install --dev```
 3. Navigate to the [http://localhost:8000/docs](http://localhost:8000/docs) and execute test API call. You can monitor the execution of the celery tasks in the console logs or navigate to the flower monitoring app at [http://localhost:5555](http://localhost:5555) (username: user, password: test).
 
 ### Run on kubernetes.
- 1. Clone the repository.
+1. Clone the repository.
     
 ```
 git clone https://github.com/jspawar80/fastapi-celery.git
