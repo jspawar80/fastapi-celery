@@ -108,6 +108,7 @@ Execute the following command: ```poetry install --dev```
 git clone https://github.com/jspawar80/fastapi-celery.git
 ``
 2. Deployment on kubernetes.
+
 ```
 cd fastapi-celery/
 kubectl apply -f K8s/
