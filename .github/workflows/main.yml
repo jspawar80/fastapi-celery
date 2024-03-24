@@ -1,7 +1,7 @@
 name: Docker Build, Push and Deploy to AWS EKS
 
 on:
-  pull_request:
+  push:
     branches:
       - test
 
